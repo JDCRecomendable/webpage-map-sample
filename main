@@ -2,4 +2,5 @@
 
 pip3 install -e .
 export FLASK_APP=webpage_map_sample
+export FLASK_DEBUG=1
 flask run
