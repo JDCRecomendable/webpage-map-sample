@@ -3,3 +3,8 @@ body {
     background-color: black;
     color: white;
 }
+
+#main-map {
+    width: 800px;
+    height: 600px;
+}
