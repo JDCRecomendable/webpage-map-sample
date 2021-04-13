@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pip3 install -e .
+export FLASK_APP=webpage_map_sample
+flask run
