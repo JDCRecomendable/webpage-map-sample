@@ -1,9 +1,9 @@
 var mymap = L.map('main-map').setView([lat, lon], 15);
-mymap.dragging.disable()
-mymap.touchZoom.disable()
-mymap.doubleClickZoom.disable()
-mymap.scrollWheelZoom.disable()
-mymap.boxZoom.disable()
+// mymap.dragging.disable()
+// mymap.touchZoom.disable()
+// mymap.doubleClickZoom.disable()
+// mymap.scrollWheelZoom.disable()
+// mymap.boxZoom.disable()
 var savedCoordinates = []
 
 var osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -46,22 +46,22 @@ mymap.on('mousemove', function(event) {
     document.getElementById('side-pane-content').innerHTML = event.latlng.lat + "<br>" + event.latlng.lng
 })
 
-mymap.on("keydown", function(event) {
-    if (event.originalEvent.key == " ") {
-        mymap.dragging.enable()
-        mymap.touchZoom.enable()
-        mymap.doubleClickZoom.enable()
-        mymap.scrollWheelZoom.enable()
-        mymap.boxZoom.enable()
-    }
-})
+// mymap.on("keydown", function(event) {
+//     if (event.originalEvent.key == " ") {
+//         mymap.dragging.enable()
+//         mymap.touchZoom.enable()
+//         mymap.doubleClickZoom.enable()
+//         mymap.scrollWheelZoom.enable()
+//         mymap.boxZoom.enable()
+//     }
+// })
 
-mymap.on("keyup", function(event) {
-    if (event.originalEvent.key == " ") {
-        mymap.dragging.disable()
-        mymap.touchZoom.disable()
-        mymap.doubleClickZoom.disable()
-        mymap.scrollWheelZoom.disable()
-        mymap.boxZoom.disable()
-    }
-})
+// mymap.on("keyup", function(event) {
+//     if (event.originalEvent.key == " ") {
+//         mymap.dragging.disable()
+//         mymap.touchZoom.disable()
+//         mymap.doubleClickZoom.disable()
+//         mymap.scrollWheelZoom.disable()
+//         mymap.boxZoom.disable()
+//     }
+// })
