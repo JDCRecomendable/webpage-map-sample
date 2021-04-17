@@ -22,10 +22,35 @@
 {% block pagecontent %}
 <div id="main-map"></div>
 
-<div id="side-pane">
-    <h3 id="side-pane-header">Details</h1>
+<div id="side-pane" class="sidebar">
+    <h1 id="side-pane-header">Area 1</h1>
+    <div class="score-section-year">
+        <h3 class="score-title">Showing scores for:</h3>
+        <h2 class="score-text">2013</h2>
+    </div>
+    <div>
+        <h3 class="score-title">Industrialisation Score (0-1)</h3>
+        <h2 class="score-text">0.7 (High)</h2>
+    </div>
+    <div>
+        <h3 class="score-title">Vegetation Score (0-1)</h3>
+        <h2 class="score-text">0.8 (High)</h2>
+    </div>
+    <div>
+        <h3 class="score-title">Urbanisation Score (0-1)</h3>
+        <h2 class="score-text">0.8 (High)</h2>
+    </div>
+    <div>
+        <h3 class="score-title">Vegetation : industry ratio</h3>
+        <div ></div>
+    </div>
     <div id="side-pane-content">Content</div>
 </div>
+
+<!-- <div id="side-pane">
+    <h3 id="side-pane-header">Details</h1>
+    <div id="side-pane-content">Content</div>
+</div> -->
 
 <!-- Import Leaflet.js Script -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
