@@ -257,9 +257,6 @@ mymap.on("mouseup", function(event) {
 })
 
 function nextYear() {
-    console.log(currentYear)
-    console.log(tleft)
-    console.log(geocodeSetting)
     post_coordinates('/', {
         tleft: tleft.tleft,
         bright: bright.bright,
@@ -271,7 +268,6 @@ function nextYear() {
 }
 
 function prevYear() {
-    console.log(currentYear)
     post_coordinates('/', {
         tleft: tleft.tleft,
         bright: bright.bright,

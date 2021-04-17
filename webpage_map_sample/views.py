@@ -30,7 +30,8 @@ def clean_up(coordinates):
 def index(geocode=[-43.52, 172.63], industrialisation_score=0.5, vegetation_score=0.5, coordinates=coordinates, year=2011, zoom=15):
     geocode = clean_up(request.form['geocode'])
     zoom = float(request.form['zoom'])
-    year = min(2011, max(2013, int(request.form['year'])))
+    year = min(2013, max(2011, int(request.form['year'])))
+    print(year)
     if request.method == 'POST':
         tleft = clean_up(request.form['tleft'])
         bright = clean_up(request.form['bright'])
