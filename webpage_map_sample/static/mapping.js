@@ -54,7 +54,7 @@ L.control.layers(
     baseLayers,
     {},
     {
-        position: 'bottomleft'
+        position: 'bottomright'
     }
 ).addTo(mymap)
 
