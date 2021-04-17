@@ -2,7 +2,7 @@
 var mymap = L.map('main-map', {
     zoomControl: false,
     center: [lat, lon],
-    zoom: 15
+    zoom: initialZoom
 })
 
 // // Disable zooming and dragging
@@ -22,6 +22,8 @@ var mouseCoordinatesOnClick = []
 var spacePressed = [false]
 var shiftPressed = [false]
 var selectionDiv = []
+var geocode = []
+var zoomSetting = [initialZoom]
 
 // Add standard layer
 var osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -63,33 +65,33 @@ L.control.zoom({
 
 // console.log(coordinates)
 
-// // Add markers on the map
-// for (var i = 0; i < coordinates.length; i++) {
-//     savedCoordinates.push(L.rectangle([coordinates[i].tleft, coordinates[i].bright])
-//         .addTo(mymap)
-//         .bindPopup(coordinates[i].area).openPopup()
-//     )
-// }
+// Add markers on the map
+for (var i = 0; i < coordinates.length; i++) {
+    savedCoordinates.push(L.rectangle([coordinates[i].tleft, coordinates[i].bright])
+        .addTo(mymap)
+        // .bindPopup(coordinates[i].area).openPopup()
+    )
+}
 
 // Dynamically change elements
 // mymap.on('mousemove', function(event) {
 //     document.getElementById('side-pane-content').innerHTML = event.latlng.lat + "<br>" + event.latlng.lng
 // })
 
-for (var i = 0; i < savedCoordinates.length; i++) {
-    savedCoordinates[i].on('mouseover', function(event) {
-        var tleft = event.sourceTarget._latlngs[0][1]
-        var bright = event.sourceTarget._latlngs[0][3]
-        document.getElementById('side-pane').style.opacity = 100
-        document.getElementById('side-pane').style.pointerEvents = "auto"
-        document.getElementById('side-pane-content').innerHTML = tleft + "<br>" + bright
-    })
+// for (var i = 0; i < savedCoordinates.length; i++) {
+//     savedCoordinates[i].on('mouseover', function(event) {
+//         var tleft = event.sourceTarget._latlngs[0][1]
+//         var bright = event.sourceTarget._latlngs[0][3]
+//         document.getElementById('side-pane').style.opacity = 100
+//         document.getElementById('side-pane').style.pointerEvents = "auto"
+//         document.getElementById('side-pane-content').innerHTML = tleft + "<br>" + bright
+//     })
 
-    savedCoordinates[i].on('mouseout', function(event) {
-        document.getElementById('side-pane').style.opacity = 0
-        document.getElementById('side-pane').style.pointerEvents = "none"
-    })
-}
+//     savedCoordinates[i].on('mouseout', function(event) {
+//         document.getElementById('side-pane').style.opacity = 0
+//         document.getElementById('side-pane').style.pointerEvents = "none"
+//     })
+// }
 
 mymap.on("keydown", function(event) {
     if (event.originalEvent.key == " ") {
@@ -132,6 +134,11 @@ function recordArray(array, event) {
     array.push(lng)
 }
 
+mymap.on("zoomend", function(event) {
+    zoomSetting.length = 0
+    zoomSetting.push(mymap.getZoom())
+})
+
 mymap.on("mousedown", function(event) {
     if (spacePressed[0] == false) {
         recordArray(coordinatesOnClick, event)
@@ -157,7 +164,12 @@ mymap.on("mousedown", function(event) {
     }
 })
 
-// mymap.on("mousemove", function(event) {
+mymap.on("mousemove", function(event) {
+    var bounds = mymap.getBounds()
+    geocode.length = 0
+    geocode.push(bounds.getCenter().lat, bounds.getCenter().lng)
+})
+
 //     if (spacePressed[0] == false) {
 //         if (selectionDiv.length > 0) {
 //             var intendedWidth = Math.abs(event.originalEvent.pageX - mouseCoordinatesOnClick[0])
@@ -211,6 +223,8 @@ mymap.on("mouseup", function(event) {
     if (spacePressed[0] == false) {
         recordArray(coordinatesOnRelease, event)
         console.log(coordinatesOnRelease)
+        console.log(tleft.tleft)
+        console.log(bright.bright)
     //     console.log(coordinatesOnRelease)
 
     //     if  (selectionDiv.length > 0) {
@@ -222,9 +236,40 @@ mymap.on("mouseup", function(event) {
     console.log(shiftPressed[0])
     
     if (shiftPressed[0] == true) {
+        console.log(coordinatesOnClick)
         post_coordinates('/', {
             tleft: coordinatesOnClick,
-            bright: coordinatesOnRelease
+            bright: coordinatesOnRelease,
+            year: currentYear,
+            updateScore: true,
+            geocode: geocode,
+            zoom: zoomSetting
         })
     }
 })
+
+function nextYear() {
+    console.log(currentYear)
+    console.log(tleft)
+    console.log(geocode)
+    post_coordinates('/', {
+        tleft: tleft.tleft,
+        bright: bright.bright,
+        year: currentYear + 1,
+        updateScore: false,
+        geocode: geocode,
+        zoom: zoomSetting
+    })
+}
+
+function prevYear() {
+    console.log(currentYear)
+    post_coordinates('/', {
+        tleft: tleft.tleft,
+        bright: bright.bright,
+        year: currentYear - 1,
+        updateScore: false,
+        geocode: geocode,
+        zoom: zoomSetting
+    })
+}

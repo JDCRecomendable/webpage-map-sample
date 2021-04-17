@@ -6,8 +6,16 @@
 <script>
     var lat = Number("{{ geocode[0] }}")
     var lon = Number("{{ geocode[1] }}")
+    console.log('TEST TEST')
+    console.log(lat)
+    console.log(lon)
+    var currentYear = Number("{{ year }}")
 
-    // var coordinates = JSON.parse('{{ coordinates|safe }}')
+    var coordinates = JSON.parse('{{ coordinates|safe }}')
+
+    var tleft = coordinates[0]
+    var bright = coordinates[1]
+    var initialZoom = Number({{ zoom }})
 </script>
 {% endblock %}
 
@@ -28,19 +36,29 @@
         <h1 id="side-pane-header">Area 1</h1>
         <div class="score-section-year">
             <h3 class="score-title">Showing scores for:</h3>
-            <h2 class="score-text">2013</h2>
-        </div>
-        <div>
-            <h3 class="score-title">Industrialisation Score (0-1)</h3>
-            <h2 class="score-text">0.7 (High)</h2>
+            <h2 class="score-text">{{ year }}</h2>
+            <button type="button" class="btn btn-outline-secondary" onclick="prevYear()"> - </button>
+            <button type="button" class="btn btn-outline-secondary" onclick="nextYear()"> + </button>
         </div>
         <div>
             <h3 class="score-title">Vegetation Score (0-1)</h3>
-            <h2 class="score-text">0.8 (High)</h2>
+            {% if vegetation_score > 0.7 %}
+                <h2 class="score-text text-success">{{ vegetation_score }} (Good)</h2>
+            {% elif vegetation_score > 0.4 %}
+                <h2 class="score-text text-warning">{{ vegetation_score }} (Average)</h2>
+            {% else %}
+                <h2 class="score-text text-danger">{{ vegetation_score }} (Poor)</h2>
+            {% endif %}
         </div>
         <div>
-            <h3 class="score-title">Urbanisation Score (0-1)</h3>
-            <h2 class="score-text">0.8 (High)</h2>
+            <h3 class="score-title">Industrialisation Score (0-1)</h3>
+            {% if industrialisation_score > 0.7 %}
+                <h2 class="score-text">{{ industrialisation_score }} (High)</h2>
+            {% elif industrialisation_score > 0.4 %}
+                <h2 class="score-text">{{ industrialisation_score }} (Medium)</h2>
+            {% else %}
+                <h2 class="score-text">{{ industrialisation_score }} (Low)</h2>
+            {% endif %}
         </div>
         <div>
             <h3 class="score-title">Vegetation : industry ratio</h3>

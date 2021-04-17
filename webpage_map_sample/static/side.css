@@ -8,8 +8,6 @@
     width: 20vw;
     padding: 22px;
     border-radius: 12px;
-    opacity: 0;
-    pointer-events: none;
 }
 
 #side-pane-header {
