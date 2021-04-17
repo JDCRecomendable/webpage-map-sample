@@ -33,13 +33,20 @@ def index(geocode=[-43.52, 172.63], industrialisation_score=0.5, vegetation_scor
         geocode = clean_up(request.form['geocode'])
         zoom = float(request.form['zoom'])
         year = min(2013, max(2011, int(request.form['year'])))
-        
+
         tleft = clean_up(request.form['tleft'])
         bright = clean_up(request.form['bright'])
+
+        lowest_lat = min(tleft[0], bright[0])
+        highest_lat = max(tleft[0], bright[0])
+
+        lowest_lng = min(tleft[1], bright[1])
+        highest_lng = max(tleft[1], bright[1])
+
         update_score = request.form['updateScore']
         print(geocode, 'gggggggg')
 
-        if update_score == 'true':
+        if update_score == 'true' and not (lowest_lat <= coordinates[0]["bright"][0] or lowest_lng <= coordinates[0]["tleft"][1] or highest_lat >= coordinates[0]["tleft"][0] or highest_lng >= coordinates[0]["bright"][1]):
             centre_x = (tleft[0] + bright[0]) / 2
             centre_y = (tleft[1] + bright[1]) / 2
             geocode = [centre_x, centre_y]
