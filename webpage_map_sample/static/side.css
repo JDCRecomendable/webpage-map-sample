@@ -1,15 +1,30 @@
 #side-pane {
-    position: absolute;
-    top: 60px;
-    right: 5px;
-    background-color: black;
-    color: white;
+    position: relative;
+    top: 8px;
+    left: 8px;
+    background-color: white;
+    color: black;
     min-width: 220px;
-    width: 18vw;
-    border-radius: 8px;
-    padding: 8px;
+    width: 20vw;
+    padding: 22px;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
 }
 
 #side-pane-header {
-    text-align: center;
+    font-weight: 700;
+}
+
+.score-section-year {
+    margin: 12px 0px;
+}
+
+.score-title {
+    font-size: 20px;
+}
+
+.score-text {
+    font-weight: 600;
+    font-size: 28px;
 }

@@ -12,7 +12,7 @@ var mymap = L.map('main-map', {
 // mymap.scrollWheelZoom.disable()
 // mymap.boxZoom.disable()
 
-// Save coordinates in an array
+// Save coordinates in an array and associated data
 var savedCoordinates = []
 
 // Add standard layer
@@ -53,18 +53,35 @@ L.control.zoom({
     position: 'topright'
 }).addTo(mymap)
 
+console.log(coordinates)
+
 // Add markers on the map
 for (var i = 0; i < coordinates.length; i++) {
-    savedCoordinates.push(L.marker([coordinates[i].lat, coordinates[i].lng])
+    savedCoordinates.push(L.rectangle([coordinates[i].tleft, coordinates[i].bright])
         .addTo(mymap)
         .bindPopup(coordinates[i].area).openPopup()
     )
 }
 
 // Dynamically change elements
-mymap.on('mousemove', function(event) {
-    document.getElementById('side-pane-content').innerHTML = event.latlng.lat + "<br>" + event.latlng.lng
-})
+// mymap.on('mousemove', function(event) {
+//     document.getElementById('side-pane-content').innerHTML = event.latlng.lat + "<br>" + event.latlng.lng
+// })
+
+for (var i = 0; i < savedCoordinates.length; i++) {
+    savedCoordinates[i].on('mouseover', function(event) {
+        var tleft = event.sourceTarget._latlngs[0][1]
+        var bright = event.sourceTarget._latlngs[0][3]
+        document.getElementById('side-pane').style.opacity = 100
+        document.getElementById('side-pane').style.pointerEvents = "auto"
+        document.getElementById('side-pane-content').innerHTML += tleft + "<br>" + bright
+    })
+
+    savedCoordinates[i].on('mouseout', function(event) {
+        document.getElementById('side-pane').style.opacity = 0
+        document.getElementById('side-pane').style.pointerEvents = "none"
+    })
+}
 
 // mymap.on("keydown", function(event) {
 //     if (event.originalEvent.key == " ") {
