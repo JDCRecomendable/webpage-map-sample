@@ -68,6 +68,10 @@
             <div ></div>
         </div>
     </div>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
 </div>
 
 <!-- Import Leaflet.js Script -->
@@ -79,4 +83,42 @@
 <script src="https://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
 <script src="{{ url_for('static', filename='mapping.js') }}"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.onload = function () {
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+        ];
+        const data = {
+            labels: ['Industrialisation', 'Vegetation'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    '#388e3c',
+                ],
+                data: [Number("{{ industrialisation_score}}"), Number("{{ vegetation_score}}"), ],
+                hoverOffset: 4,
+            }]
+        };
+
+        const config = {
+            type: 'doughnut',
+            data: data,
+        };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+    }
+</script>
 {% endblock %}
