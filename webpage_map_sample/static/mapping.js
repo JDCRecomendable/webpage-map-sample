@@ -1,4 +1,9 @@
-var mymap = L.map('main-map').setView([lat, lon], 15);
+var mymap = L.map('main-map', {
+    zoomControl: false,
+    center: [lat, lon],
+    zoom: 15
+})
+
 // mymap.dragging.disable()
 // mymap.touchZoom.disable()
 // mymap.doubleClickZoom.disable()
@@ -34,6 +39,10 @@ L.control.layers(
         position: 'bottomleft'
     }
 ).addTo(mymap)
+
+L.control.zoom({
+    position: 'topright'
+}).addTo(mymap)
 
 for (var i = 0; i < coordinates.length; i++) {
     savedCoordinates.push(L.marker([coordinates[i].lat, coordinates[i].lng])
