@@ -22,7 +22,7 @@ var mouseCoordinatesOnClick = []
 var spacePressed = [false]
 var shiftPressed = [false]
 var selectionDiv = []
-var geocode = []
+var geocodeSetting = [lat, lon]
 var zoomSetting = [initialZoom]
 
 // Add standard layer
@@ -164,10 +164,18 @@ mymap.on("mousedown", function(event) {
     }
 })
 
-mymap.on("mousemove", function(event) {
+function updateGeocode() {
     var bounds = mymap.getBounds()
-    geocode.length = 0
-    geocode.push(bounds.getCenter().lat, bounds.getCenter().lng)
+    geocodeSetting.length = 0
+    geocodeSetting.push(bounds.getCenter().lat, bounds.getCenter().lng)
+}
+
+mymap.on("mousemove", function(event) {
+    updateGeocode()
+})
+
+mymap.on("load", function(event) {
+    updateGeocode()
 })
 
 //     if (spacePressed[0] == false) {
@@ -242,7 +250,7 @@ mymap.on("mouseup", function(event) {
             bright: coordinatesOnRelease,
             year: currentYear,
             updateScore: true,
-            geocode: geocode,
+            geocode: geocodeSetting,
             zoom: zoomSetting
         })
     }
@@ -251,13 +259,13 @@ mymap.on("mouseup", function(event) {
 function nextYear() {
     console.log(currentYear)
     console.log(tleft)
-    console.log(geocode)
+    console.log(geocodeSetting)
     post_coordinates('/', {
         tleft: tleft.tleft,
         bright: bright.bright,
         year: currentYear + 1,
         updateScore: false,
-        geocode: geocode,
+        geocode: geocodeSetting,
         zoom: zoomSetting
     })
 }
@@ -269,7 +277,7 @@ function prevYear() {
         bright: bright.bright,
         year: currentYear - 1,
         updateScore: false,
-        geocode: geocode,
+        geocode: geocodeSetting,
         zoom: zoomSetting
     })
 }
