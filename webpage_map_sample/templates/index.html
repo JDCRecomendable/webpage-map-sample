@@ -2,11 +2,12 @@
 
 {% block pageheader %}
 <link rel="stylesheet" href="{{ url_for('static', filename='side.css') }}">
+
 <script>
     var lat = Number("{{ geocode[0] }}")
     var lon = Number("{{ geocode[1] }}")
 
-    var coordinates = JSON.parse('{{ coordinates|safe }}')
+    // var coordinates = JSON.parse('{{ coordinates|safe }}')
 </script>
 {% endblock %}
 
@@ -50,6 +51,11 @@
 
 <!-- Import Leaflet.js Script -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="https://leaflet.github.io/Leaflet.draw/src/Leaflet.draw.js"></script>
+<script src="https://leaflet.github.io/Leaflet.draw/src/Leaflet.Draw.Event.js"></script>
+<script src="https://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
+<script src="https://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
+<script src="https://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
 <script src="{{ url_for('static', filename='mapping.js') }}"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
