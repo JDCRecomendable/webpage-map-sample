@@ -1,26 +1,33 @@
 {% extends "__layout.html" %}
 
 {% block navigation %}
-<li class="nav-item active">
-    <a class="nav-link" href="/">Predictions</a>
-</li>
 <li class="nav-item">
-    <a class="nav-link" href="#">Why Us? <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="/">App</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="#">About Us <span class="sr-only">(current)</span></a>
 </li>
 {% endblock %}
 
 {% block pagecontent %}
 <div class="container">
-    <h2>Creativity</h2>
-    <p>Lorem Ipsum</p>
+    <h2>Summary</h2>
+    <p>The project aims to raise awareness in the environment in an era of rapid industrialisation and urbanisation.  Users of this programme&#x2014;the general public&#x2014;can look up our project website to see how their vicinity has been changing over the years in terms of three factors&#x2014;the amount of industrial buildings ("industrialisation"), vegetation and area occupied by settlements.  The website rates each neighbourhood based on the factors, which can be used by academics and environmental activists to study and show whether an area is seeing loss in vegetation in light of rapid growth.</p>
 
-    <h2>Challenge Problem and Solution</h2>
-    <p>Lorem Ipsum</p>
+    <h2>Creativity</h2>
+    <p>This tool can be used to quickly analysis an area, giving a quantitative description of the use type of the area.  User can turn on the overlay and visually identify regions that are coloured differently. The tool can also be used as a timeline to access the changes in an area, using historical satellite images.  We find it difficult to quantitatively compare two regions of their urbanisation progress, vegetation coverage, and changes in past years.</p>
+    <p>Our method involved using the near infrared spectrum to identify vegetation, and using the tradition RGB spectrum to identify different buildings based on their color.  Since most white colored rooftop are larger structures like warehouses, stores, and factories.  Across a large area, this method produces reasonably accurate labels for commercial buildings in clusters.  Our web app demonstrates this feature on a few locations in the provided dataset, displaying information about the a highlighted area.</p>
+
+    <h2>Challenge Problem or Opportunity</h2>
+    <p>Our challenge is to tell how industrialised an area is and how much vegetation it is covered by, which can be used as indexes to quickly assess an area.  Our tool can be used by the general public to simply raise awareness to urbanisation problems, by governors to gain insights to an area, or by tourists to quickly know some places.</p>
 
     <h2>Solutions</h2>
-    <p>Lorem Ipsum</p>
+    <p>To work with the GeoTIFF file we are given, we used Rasterio to access the metadata from the imagery. We used 4-band multispectral images from 2011, 2012, 2013 for the demonstration.  We first extracted the 4 bands into individual numpy arrays, and created an RGB array and a NRG false color composite array, which are then processed to pick out pixels that meet the threshold for green value and white value.  The processed image is stored as an RGB image, but are black everywhere except for those pixels that meet the threshold.</p>
+    <p>To use this data in a web app with interactive map, we need to convert between the latitude/longitude coordinate system EPSG:4326 and the EPSG:32759 system used in the dataset, therefore we used the PyProj library to do the conversion, and then wrote a function to convert the latitude/longitude to corresponding pixels in the processed map.  With these functions, the users will be able to simple draw a bounding box on the interactive map, and the tool will output the index of industrialisation and vegetation of the area.</p>
 
     <h2>Competitive Advantage</h2>
-    <p>Lorem Ipsum</p>
+    <p>Previously checking the scale of industrialisation and vegetation coverage of a city is not a straightforward process.  It mostly involves searching for data from the Internet, or by viewing the satellite images of the map. This has been an especially difficult task for vegetation, since they are few and scattered in city, usually along roads and in residential areas, where the images are very hard to read because of the number of objects satellite imagery captures, therefore costly and time consuming to read.  Our tool provides a fast and quantitative description.</p>
+    <p>Our target users are governors, tourists and the members of the public, anyone who wishes to quantitatively understand the area of interest could benefit from using our tool, it will save time and effort for the users, while presenting a quantitative index.</p>
+    <p>Some further development should see improvements in the amount of information the tool can gather from the satellite imagery, such as getting the density of the vegetation; it could also be using machine learning to detect certain objects that have more complex patterns, such as cars and roads.</p>
 </div>>
 {% endblock %}
