@@ -136,14 +136,14 @@ def convert_coordinates(coord1=[-43.535000, 172.6108000], coord2=[-43.53000, 172
 def getvege(tl,br,year,greenMap=greenMap):
     greenmap = greenMap[year-2011]
     size = abs((br[0]-tl[0])*(br[1]-tl[1]))
-    newmap = greenmap[tl[0]:br[0],tl[1]:br[1],:]
+    newmap = greenmap[br[0]:tl[0],tl[1]:br[1],:]
     count = sum(sum(sum(newmap)))
     return count/size
 
 def getind(tl,br,year,whiteMap=whiteMap):
     whitemap = whiteMap[year-2011]
     size = abs((br[0]-tl[0])*(br[1]-tl[1]))
-    newmap = whitemap[tl[0]:br[0],tl[1]:br[1],:]
+    newmap = whitemap[br[0]:tl[0],tl[1]:br[1],:]
     count = sum(sum(sum(newmap)))
 
     return count/size
