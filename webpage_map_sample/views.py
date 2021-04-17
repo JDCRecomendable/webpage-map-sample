@@ -23,9 +23,6 @@ coordinates = [
 
 def clean_up(coordinates):
     floats = coordinates.split(',')
-    print(floats, 'AAA')
-    print(float(floats[0]))
-    print(float(floats[1]))
     return [float(floats[0]), float(floats[1])]
 
 @app.route('/', methods=['GET', 'POST'])
@@ -36,6 +33,7 @@ def index(geocode=[-43.52, 172.63], industrialisation_score=0.5, vegetation_scor
         update_score = request.form['updateScore']
         geocode = clean_up(request.form['geocode'])
         zoom = float(request.form['zoom'])
+        year = min(2011, max(2013, int(request.form['year'])))
         print(geocode, 'gggggggg')
 
         if update_score == 'true':
