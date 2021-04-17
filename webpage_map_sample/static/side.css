@@ -1,0 +1,15 @@
+#side-pane {
+    position: absolute;
+    top: 60px;
+    right: 5px;
+    background-color: black;
+    color: white;
+    min-width: 220px;
+    width: 18vw;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+#side-pane-header {
+    text-align: center;
+}

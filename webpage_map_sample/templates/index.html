@@ -1,51 +1,34 @@
-<!DOCTYPE html>
-<!-- Copyright (c) 2021 Jared Daniel Carbonell Recomendable. All rights reserved. -->
+{% extends "__layout.html" %}
 
-<html>
+{% block pageheader %}
+<link rel="stylesheet" href="{{ url_for('static', filename='side.css') }}">
+<script>
+    var lat = Number("{{ geocode[0] }}")
+    var lon = Number("{{ geocode[1] }}")
 
-    <head>
-        <meta charset="utf-8">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-        <meta name="description" content="Map">
-        <meta name="author" content="Jared Daniel Recomendable">
-        <title>Sample</title>
-        <!-- <link rel="icon" href="logo.png" type="image/x-icon"> -->
+    var coordinates = JSON.parse('{{ coordinates|safe }}')
+</script>
+{% endblock %}
 
-        <!-- Include Bootstrap and Font Awesome -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block navigation %}
+<li class="nav-item active">
+    <a class="nav-link" href="#">Predictions <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/whyus">Why Us?</a>
+</li>
+{% endblock %}
 
-        <!-- Use Google's Open Sans -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+{% block pagecontent %}
+<div id="main-map"></div>
 
-        <!-- Import Leaflet.js Stylesheet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-    </head>
+<div id="side-pane">
+    <h3 id="side-pane-header">Details</h1>
+    <div id="side-pane-content">Content</div>
+</div>
 
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Predictions <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Why Us?</a>
-                </li>
-                </ul>
-            </div>
-        </nav>
-        
-        <div id="main-map"></div>
-
-        <!-- Import Leaflet.js Script -->
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-        <script src="{{ url_for('static', filename='mapping.js') }}"></script>
-    </body>
-
-</html>
+<!-- Import Leaflet.js Script -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="{{ url_for('static', filename='mapping.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

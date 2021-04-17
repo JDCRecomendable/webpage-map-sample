@@ -13,4 +13,5 @@ html, body, #main-map {
 
 #main-map {
     position: fixed;
+    height: 93vh;
 }
