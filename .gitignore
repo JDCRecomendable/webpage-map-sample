@@ -1,3 +1,4 @@
 webpage_map_sample.egg-info/
 webpage_map_sample/__pycache__
 env/
+data_analysis/__pycache__
