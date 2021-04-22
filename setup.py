@@ -6,5 +6,9 @@ setup(
     include_package_data=True,
     install_requires=[
         "flask",
+        "rasterio",
+        "matplotlib",
+        "numpy",
+        "pyproj"
     ]
 )
