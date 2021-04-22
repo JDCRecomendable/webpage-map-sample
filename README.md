@@ -1,9 +1,10 @@
 # Webpage Map Sample
 * For the NZ Geospatial Hackathon 2021
 * In collaboration with:
-  * Bowen Xiang
-  * Tony Cui
-  * Victor Gan
+  * Bowen Xiang (https://github.com/ThreonX)
+  * Jared Recomendable (https://github.com/JDCRecomendable)
+  * Tony Cui (https://github.com/TonyCui02)
+  * Victor Gan (https://github.com/VictorGan2)
 
 ## Setup
 ### Pre-Requisites
